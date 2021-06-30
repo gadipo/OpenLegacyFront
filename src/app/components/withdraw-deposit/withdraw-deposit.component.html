@@ -1,0 +1,27 @@
+<div>
+    <h2>Withdraw / Deposit - {{item.title}}</h2>
+    <span>Current Amount: {{item.amount}}</span><br><br>
+    <mat-tab-group>
+        <mat-tab label= "withdraw"><br>
+            <form [formGroup]="withdrawForm" >
+                <mat-form-field appearance ="outline">
+                    <mat-label>Amount to Withdraw</mat-label>
+                    <input type="number" matInput formControlName="amountToWithdraw" required>
+                    <mat-error>Amount to Withdraw is required !</mat-error>
+                </mat-form-field><br>
+                <button mat-raised-button type="submit" [disabled]="!withdrawForm.valid" (click)="withdraw()">Withdarw</button>
+                </form>
+        </mat-tab>
+        <mat-tab label="deposit"><br>
+            <form [formGroup]="depositForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Amount to Deposit</mat-label>
+                <input type="number" matInput formControlName="amountToDeposit" required>
+                <mat-error>Amount to Deposit is required !</mat-error>
+            </mat-form-field><br>
+            <button mat-raised-button type="submit" [disabled]="!depositForm.valid" (click)="deposit()">Deposit</button>
+            <br><br>
+        </form>
+        </mat-tab>
+    </mat-tab-group>
+</div>

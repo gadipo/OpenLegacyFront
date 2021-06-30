@@ -1,0 +1,64 @@
+<div class="grid-container">
+    <mat-tab-group>
+        <mat-tab label="Search">
+            <form action="POST" [formGroup]="searchItemForm">
+                <button mat-raised-button (click)="searchItems()"
+                    [disabled]="!searchItemForm.valid">Search</button>
+                <mat-form-field>
+                    <mat-label>Item No</mat-label>
+                    <input type="number" matInput formControlName="itemNo">
+                    <button *ngIf="searchItemForm.controls['itemNo'].value" matSuffix mat-icon-button
+                        aria-label="Clear" (click)="searchItemForm.reset()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </form><br>
+            <table>
+                <tr>
+                    <th>Item No</th>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Inventory Code</th>
+                </tr>
+                <tr *ngFor="let p of items">
+                    <td>{{p.itemNo}}</td>
+                    <td>
+                        <span>{{p.title}}</span>
+                    </td>
+                    <td>
+                        <span>{{p.amount}}</span>
+                    </td>
+                    <td>
+                        {{p.inventoryCode}}
+                    </td>
+                    <button mat-raised-button (click)="withdrawDeposit(p)">Deposit/Withdraw</button>
+                    <button mat-raised-button (click)="deleteItem(p)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </tr>
+            </table><br>
+        </mat-tab>
+        <mat-tab label="Add">
+            <form [formGroup]="addItemForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input type="text" matInput formControlName="title" required>
+                    <mat-error>Title is required !</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Amount</mat-label>
+                    <input type="number" matInput formControlName="amount" required>
+                    <mat-error>Amount is required !</mat-error>
+                </mat-form-field><br>
+                <mat-form-field appearance="outline">
+                    <mat-label>Inventory Code</mat-label>
+                    <input type="text" matInput formControlName="inventoryCode" required>
+                    <mat-error>inventoryCode is required !</mat-error>
+                </mat-form-field><br>
+                <button mat-raised-button type="submit" [disabled]="!addItemForm.valid" (click)="addItem()">Add
+                    Item</button>
+                <br><br>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
